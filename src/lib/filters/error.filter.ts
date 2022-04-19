@@ -25,9 +25,10 @@ export class ErrorFilter implements ExceptionFilter {
       this.loggerConsole.error(HTTPHelper.error(exception));
 
       response.status(status).json({
-        code: status,
+        success: false,
         message: exceptionData.message,
         error: exceptionData.error,
+        code: status,
       });
     } else {
       const status: number = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -37,9 +38,10 @@ export class ErrorFilter implements ExceptionFilter {
       this.loggerConsole.error(HTTPHelper.error(exception));
 
       response.status(status).json({
-        code: status,
+        success: false,
         message: message,
         error: error,
+        code: status,
       });
     }
   }
