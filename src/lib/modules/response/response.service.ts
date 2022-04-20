@@ -6,7 +6,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ResponseService {
-  success<T>(message: string, data?: Record<string, T>): IResponse<T> {
+  success<T>(message: string, data?: T): IResponse<T> {
     if (data) {
       return {
         success: true,
@@ -29,7 +29,7 @@ export class ResponseService {
       currentPage: number;
       perPage: number;
     },
-    data: Record<string, T>[],
+    data: T[],
   ): IResponsePagination<T> {
     return {
       success: true,

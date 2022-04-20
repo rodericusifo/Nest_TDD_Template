@@ -1,7 +1,7 @@
 export interface IResponse<T> {
   readonly success: boolean;
   readonly message: string;
-  readonly data?: Record<string, T>;
+  readonly data?: T;
 }
 
 export interface IResponsePagination<T> {
@@ -13,5 +13,5 @@ export interface IResponsePagination<T> {
     readonly current_page: number;
     readonly per_page: number;
   };
-  readonly data: Record<string, T>[];
+  readonly data: T[];
 }
