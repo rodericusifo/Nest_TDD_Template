@@ -14,7 +14,7 @@ async function bootstrap() {
     bodyParser: true,
   });
   const configService = app.get(ConfigService);
-  const appPrefix = configService.get('app.prefix');
+  const appPrefix = configService.get('APP_PREFIX');
   const logger = new Logger('Main');
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
