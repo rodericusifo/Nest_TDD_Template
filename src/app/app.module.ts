@@ -1,9 +1,12 @@
 import { AppController } from '@app/app.controller';
 import { AppService } from '@app/app.service';
+import { DatabaseModule } from '@app/database/database.module';
+import { ErrorFilter } from '@lib/filters/error.filter';
+import { ResponseModule } from '@lib/modules/response/response.module';
+import { WinstonLoggerModule } from '@lib/modules/winston-logger/winston-logger.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseModule } from '@app/database/database.module';
-import { ResponseModule } from '@lib/modules/response/response.module';
+import { APP_FILTER } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -12,10 +15,17 @@ import { ResponseModule } from '@lib/modules/response/response.module';
       isGlobal: true,
       cache: true,
     }),
+    WinstonLoggerModule,
     DatabaseModule,
     ResponseModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: ErrorFilter,
+    },
+  ],
 })
 export class AppModule {}
